@@ -1,0 +1,3 @@
+# Base kustomizations
+resources:
+- deployment.yaml

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.kubernetes.io/name: restapp
+    moniker.spinnaker.io/application: restapp
+  name: pubsub-trigger
+  namespace: restapp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: restapp
+  template:
+    metadata:
+      annotations:
+        app.kubernetes.io/name: restapp
+        moniker.spinnaker.io/application: restapp
+      labels:
+        app: restapp
+    spec:
+      containers:
+        - name: restapp
+          image: gcr.io/development-project-210505/restapp
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 9090
+              name: prometheus
+              protocol: TCP
